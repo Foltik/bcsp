@@ -1,0 +1,184 @@
+* Course Fields
+** campusLocations
+Array of campuses:
+*** code
+*** description
+** subject
+Subject code
+** openSections
+** synopsisUrl
+** title
+** preReqNotes
+String (will need to parse)
+** courseString
+Colon joined string of school, subject, course number
+** school
+Object
+*** code
+*** description
+** credits
+** codeCodes
+Array of core class requirement satisfaction
+*** id
+???
+*** year
+*** term
+*** description
+*** course
+id
+*** subject
+id
+*** offeringUnitCode
+school id
+*** offeringUnitCampus
+campus letter id
+*** code
+core letter id
+*** suplement
+???
+*** lastUpdated
+unix time?
+*** unit
+???
+*** effective
+string year+month?
+*** coreCodeReferenceId
+id?
+*** codeCode
+same as code
+*** codeCodeDescription
+same as description?
+** expandedTitle
+sometimes not present
+** mainCampus
+campus letter id
+** subjectNotes
+string of notes
+** courseNumber
+** creditsObject
+*** code
+string num_credits+_+0
+*** description
+string of number + credits
+** level
+string U or G
+** campusCode
+campus letter id
+** subjectGroupNotes
+sometimes not present
+** offeringUnitCode
+school id?
+** offeringUnitTitle
+sometimes null
+** courseDescription
+sometimes empty
+** sections
+Array of objects
+*** sectionEligibility
+null?
+*** sessionDatePrintIndicator
+Y or N?
+*** examCode
+*** specialPermissionAddCode
+null?
+*** crossListedSections
+array of ???
+*** sectionNotes
+sometimes has prereq
+*** specialPermissionDropCode
+null
+*** instructors
+array of objects
+**** name
+string LAST, FIRST
+*** number
+school id?
+*** majors
+array of ???
+*** openToText
+sometimes empty
+*** openStatusText
+string OPEN/CLOSED?
+*** sessionDates
+sometimes null
+*** specialPermissionDropCodeDescription
+null?
+*** subtopic
+sometimes empty
+*** openStatus
+*** comments
+array of objects
+**** code
+number?
+**** description
+string
+*** instructorsText
+name of instructors LAST, FIRST, ...?
+*** minors
+array ??
+*** examCodeText
+string ???
+*** campusCode
+letter campus code
+*** sectionCampusLocations
+array of objects
+**** code
+campus number id
+**** description
+campus full name
+*** index
+index number
+*** unitMajors
+array ???
+*** printed
+string Y/N?
+*** specialPermissionAddCodeDescription
+null?
+*** commentsText
+comments string
+*** subtitle
+sometimes empty
+*** crossListedSectionsText
+???
+*** sectionCourseType
+???
+*** meetingTimes
+array of objects
+**** campusLocation
+campus number id
+**** roomNumber
+**** campusAbbrev
+campus letter id
+**** campusName
+UPPER campus full name
+**** startTimeMilitary
+string ex. '0810'
+**** buildingCode
+rutgers maps building code?
+**** meetingModeDesc
+string LEC, SECTION?
+**** endTimeMilitary
+string ex. '0930'
+**** meetingModeCode
+code of meetingModeDesc?
+**** baClassHours
+null?
+**** pmCode
+letter id ???
+**** meetingDay
+2 character weekday string
+**** startTime
+same as military
+**** endTime
+same as military
+*** legendKey
+null
+*** honorPrograms
+array ???
+** supplementCode
+sometimes empty or spaces
+** unitNotes
+sometimes empty
+** courseNotes
+string of notes
+* Possible Constraints
