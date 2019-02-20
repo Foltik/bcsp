@@ -1,5 +1,6 @@
 const fs = require('fs');
 const time = require('./time.js');
+const schedule = require('./scheduler.js');
 
 const distinct = (array, accessor) => [...new Set(array.map(accessor))];
 
@@ -7,7 +8,6 @@ const courses_file = './data/2019-1-NB-courses.json';
 const section_file = './data/2019-1-NB-openSections.json';
 
 const t0 = process.hrtime();
-
 
 const raw_courses = fs.readFileSync(courses_file);
 const courses = JSON.parse(raw_courses).map(c => ({
@@ -29,8 +29,6 @@ const courses = JSON.parse(raw_courses).map(c => ({
     }))
 }));
 
-//console.log(courses.find(c => c.subject == 198 && c.code == 211).sections[0].times);
-
 const my_courses = [
     courses.find(c => c.subject == 198 && c.code == 205),
     courses.find(c => c.subject == 198 && c.code == 211),
@@ -38,44 +36,34 @@ const my_courses = [
     courses.find(c => c.subject == 640 && c.code == 250),
 ];
 
-function* cartesian(head, ...tail) {
-    const remainder = tail.length > 0 ? cartesian(...tail) : [[]];
-    for (let r of remainder)
-        for (let h of head)
-            yield [h, ...r];
-}
+const time_reqs = [
+    t => t.interval[0] > time.minutes('0800'),
+    t => t.campus == 2 || t.campus == 3,
+];
+const trans_reqs = [
+    t => !time.overlaps(20, t[0].interval, t[1].interval)
+];
+const section_reqs = [];
 
-function* permutations(a, b) {
-    for (let i = 0; i < a.length; i++)
-        for (let j = 0; j < b.length; j++)
-            yield [a[i], b[j]];
-}
 
-function combinations(n, lst) {
-    if (!n) return [[]];
-    if (!lst.length) return [];
 
-    var x = lst[0],
-        xs = lst.slice(1);
+// unary - After a single match add the score once
+// sum   - After each match add the score
+// all   - Add the score once if all match
+const time_prefs = [
+    [500, t => t.interval[0] > time.minutes('1000'), 'all']
+];
+const trans_prefs = [
+    [100, t => t[0].campus != t[1].campus && time.delta(t[0].interval[1], t[1].interval[0]) >= 30, 'all']
+];
+const section_prefs = [];
 
-    return combinations(n - 1, xs).map(function (t) {
-        return [x].concat(t);
-    }).concat(combinations(n, xs));
-}
 
-const times_compatible = (t0, t1) => !time.intersects(t0.interval, t1.interval) || t0.day != t1.day;
-const sections_compatible = (s0, s1) => Array.from(cartesian(s0.times, s1.times)).reduceRight((acc, pair) => acc && times_compatible(...pair));
-const schedule_compatible = sections => combinations(2, sections).reduceRight((acc, pair) => acc && sections_compatible(...pair));
-
-const schedules = cartesian(...my_courses.map(c => c.sections));
-
-let results = [];
-for (let schedule of schedules) {
-    if (schedule_compatible(schedule))
-        results.push(schedule);
-}
-console.log(results);
+const results = schedule(my_courses,
+                         time_reqs, trans_reqs, section_reqs,
+                         time_prefs, trans_prefs, section_prefs).toArray();
 console.log(`Valid: ${results.length} of ${my_courses.map(c => c.sections.length).reduceRight((acc, v) => acc * v)}`);
+
 
 const t1 = process.hrtime();
 const dt = [t1[0] - t0[0], t1[1] - t0[1]];
