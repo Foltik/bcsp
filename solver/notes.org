@@ -17,7 +17,7 @@ Object
 *** code
 *** description
 ** credits
-** codeCodes
+** coreCodes
 Array of core class requirement satisfaction
 *** id
 ???
@@ -168,9 +168,9 @@ letter id ???
 **** meetingDay
 2 character weekday string
 **** startTime
-same as military
+only 0000 - 1200
 **** endTime
-same as military
+only 0000 - 1200
 *** legendKey
 null
 *** honorPrograms
@@ -181,4 +181,11 @@ sometimes empty or spaces
 sometimes empty
 ** courseNotes
 string of notes
+* Custom Course Object
+** title
+** school
+** subject
+** code
+** sections
+*** 
 * Possible Constraints
