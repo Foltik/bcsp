@@ -1,0 +1,84 @@
+.calendar {
+    display: grid;
+    grid-template-columns: 1fr 14fr;
+    grid-template-rows: 1fr 10fr;
+    justify-items: stretch;
+    align-items: stretch;
+}
+
+.showcase {
+    height: 600px;
+}
+
+.calendar .corner {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.calendar .headers {
+    grid-row: 1;
+    grid-column: 2 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    justify-items: center;
+    align-items: end;
+}
+
+.calendar .header {
+    margin-bottom: 10px;
+}
+
+.calendar .days {
+    position: relative;
+    grid-row: 2;
+    grid-column: 2 / -1;
+    display: grid;
+    grid-template-columns: 0fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    justify-items: stretch;
+    align-items: stretch;
+}
+
+.calendar .day {
+    border-bottom: 1px solid #dadce0;
+}
+
+.calendar .times {
+    position: relative;
+    grid-row: 2;
+    grid-column: 1;
+}
+
+.calendar .time {
+    position: absolute;
+    right: 10%;
+    transform: translateY(-50%);
+}
+
+.calendar .block {
+    position: relative;
+    width: 98%;
+    border-radius: 4px;
+    margin-left: 1%;
+    height: 0;
+    z-index: 1;
+    background-color: #f55;
+}
+
+.calendar .separators {
+    position: relative;
+}
+
+.calendar .separator {
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    margin-top: -1px;
+    border-bottom: 1px solid #dadce0;
+    pointer-events: none;
+}
+
+.calendar .day {
+    border-right: 1px solid #dadce0;
+}

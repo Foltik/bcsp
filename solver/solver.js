@@ -64,6 +64,9 @@ const results = schedule(my_courses,
                          time_prefs, trans_prefs, section_prefs).toArray();
 console.log(`Valid: ${results.length} of ${my_courses.map(c => c.sections.length).reduceRight((acc, v) => acc * v)}`);
 
+const util = require('util');
+console.log(util.inspect(results[0].days, true, 10, true));
+
 
 const t1 = process.hrtime();
 const dt = [t1[0] - t0[0], t1[1] - t0[1]];
