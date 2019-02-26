@@ -25,9 +25,7 @@ function split_days(sections) {
                    return acc;
                }, {}))
           .reduce((acc, days) => {
-              Object.keys(days).map(day => {
-                  acc[day] = acc[day] ? acc[day].concat(days[day]) : days[day];
-              });
+              Object.keys(days).map(day => acc[day] = acc[day] ? acc[day].concat(days[day]) : days[day]);
               return acc;
           }, {});
     Object.keys(days).map(day => days[day].sort((i0, i1) => i0.interval[0] - i1.interval[1]));
