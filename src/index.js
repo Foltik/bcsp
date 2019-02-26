@@ -18,7 +18,7 @@ const courses = raw_courses.map(c => ({
         instructors: s.instructors.map(i => i.name),
         times: s.meetingTimes.map(t => ({
             name: c.title,
-            campus: t.campusLocation,
+            campus: +t.campusLocation,
             building: t.buildingCode,
             room: t.roomNumber,
             day: t.meetingDay,
@@ -29,16 +29,17 @@ const courses = raw_courses.map(c => ({
 }));
 
 const my_courses = [
-    courses.find(c => c.subject == 198 && c.code == 205),
-    courses.find(c => c.subject == 198 && c.code == 211),
-    courses.find(c => c.subject == 590 && c.code == 101),
-    courses.find(c => c.subject == 640 && c.code == 250),
+    courses.find(c => c.subject === '198' && c.code === '205'),
+    courses.find(c => c.subject === '198' && c.code === '211'),
+    courses.find(c => c.subject === '590' && c.code === '101'),
+    courses.find(c => c.subject === '640' && c.code === '250'),
 ];
 console.log(my_courses);
+console.log(courses);
 
 const time_reqs = [
     t => t.interval[0] > time.minutes('0800'),
-    t => t.campus == 2 || t.campus == 3
+    t => t.campus === 2 || t.campus === 3
 ];
 const trans_reqs = [
     t => !time.overlaps(20, t[0].interval, t[1].interval)
@@ -52,7 +53,7 @@ const time_prefs = [
     [500, t => t.interval[0] > time.minutes('1000'), 'all']
 ];
 const trans_prefs = [
-    [100, t => t[0].campus != t[1].campus && time.delta(t[0].interval[1], t[1].interval[0]) >= 30, 'all']
+    [100, t => t[0].campus !== t[1].campus && time.delta(t[0].interval[1], t[1].interval[0]) >= 30, 'all']
 ];
 const section_prefs = [];
 
