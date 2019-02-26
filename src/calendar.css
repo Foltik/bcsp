@@ -1,0 +1,76 @@
+.showcase {
+    height: 600px;
+    width: 1200px;
+}
+
+html, body, #root, #root>div {
+  height: 100%
+}
+.calendar {
+    display: grid;
+    grid-template-columns: 1fr 14fr;
+    grid-template-rows: 1fr 10fr;
+    grid-template-areas:
+        'none  headers'
+        'times days';
+}
+
+.calendar .headers {
+    grid-area: headers;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    justify-items: center;
+    align-items: end;
+}
+
+.calendar .header {
+    margin-bottom: 10px;
+}
+
+.calendar .days {
+    grid-area: days;
+    position: relative;
+    display: flex;
+}
+
+.calendar .day {
+    flex: 1 1 0;
+    border-left: 1px solid #dadce0;
+}
+
+.day:last-child {
+    border-right: 1px solid #dadce0;
+}
+
+.calendar .times {
+    grid-area: times;
+    position: relative;
+}
+
+.calendar .time {
+    position: absolute;
+    right: 10%;
+    transform: translateY(-50%);
+}
+
+.calendar .separators {
+    grid-area: days;
+    position: relative;
+}
+
+.calendar .separator {
+    position: absolute;
+    width: 100%;
+    border-bottom: 1px solid #dadce0;
+    pointer-events: none;
+}
+
+.calendar .item {
+    position: relative;
+    width: 98%;
+    margin-left: 1%;
+    border-radius: 4px;
+    z-index: 10;
+    background-color: #f55;
+}
